@@ -18,7 +18,6 @@ class PeliculaIn(Schema):
     data_estrena = date
 
 class ButacaOut(Schema):
-    sala : SalaOut
     fila : int
     numero : int
 

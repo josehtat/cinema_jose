@@ -20,6 +20,7 @@ class PeliculaIn(Schema):
 class ButacaOut(Schema):
     fila : int
     numero : int
+    tipus : str
 
 class SalaOut(Schema):
     nom : str

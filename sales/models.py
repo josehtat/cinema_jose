@@ -55,11 +55,16 @@ class Sessio(models.Model):
     def __str__(self):
         return f"{self.pelicula.titol} - {self.sala.nom} - {self.data_hora}"
 
+from django.contrib.auth.models import AbstractUser
+ 
+class Usuari(AbstractUser):
+    auth_token = models.CharField(max_length=32,blank=True,null=True)
+
 class Entrada(models.Model):
     sessio = models.ForeignKey(Sessio, on_delete=models.CASCADE, related_name='entrades')
     butaca = models.ForeignKey(Butaca, on_delete=models.CASCADE, related_name='entrades')
     preu = models.DecimalField(max_digits=6, decimal_places=2)
-    comprador = models.ForeignKey(User, on_delete=models.SET_NULL,
+    comprador = models.ForeignKey(Usuari, on_delete=models.SET_NULL,
                             null=True, blank=True, related_name='entrades')
     data_compra = models.DateTimeField(auto_now_add=True)
 
@@ -69,3 +74,4 @@ class Entrada(models.Model):
 
     def __str__(self):
         return f"Entrada per {self.sessio.pelicula.titol} - {self.butaca} - {self.comprador}"
+    
